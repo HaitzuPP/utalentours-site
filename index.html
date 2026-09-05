@@ -124,15 +124,16 @@ figcaption{font-size:.76rem;color:var(--ink-3);padding-top:9px;line-height:1.45}
   background:linear-gradient(180deg,rgba(0,0,0,0) 0%,rgba(0,0,0,.62) 100%)}
 @media(max-width:760px){.band{grid-template-columns:1fr 1fr}}
 
-/* ---------- map ---------- */
-.map-grid{display:grid;grid-template-columns:1.35fr .65fr;gap:48px;align-items:center}
-.map-legend{list-style:none;margin:0;padding:0}
-.map-legend li{padding:14px 0;border-top:1px solid var(--rule)}
-.map-legend li:last-child{border-bottom:1px solid var(--rule)}
-.map-legend .k{display:flex;align-items:center;gap:10px;font-family:var(--serif);font-size:1.05rem;margin-bottom:3px}
-.map-legend .dot{width:9px;height:9px;border-radius:50%;flex:none}
-.map-legend .d{font-size:.83rem;color:var(--ink-3);line-height:1.5}
-@media(max-width:900px){.map-grid{grid-template-columns:1fr;gap:26px}}
+/* ---------- regions ---------- */
+.regions{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;
+  background:var(--rule);border:1px solid var(--rule)}
+.region{background:var(--paper);display:flex;flex-direction:column}
+.rbar{height:4px;display:block}
+.region .inner{padding:22px 22px 26px}
+.region h3{font-size:1.06rem;margin-bottom:9px}
+.region p{font-size:.86rem;color:var(--ink-3);line-height:1.55;margin:0}
+@media(max-width:980px){.regions{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.regions{grid-template-columns:1fr}}
 
 /* ---------- journeys ---------- */
 .journeys{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule)}
@@ -342,102 +343,42 @@ html[lang="zh-Hans"] .eyebrow{letter-spacing:.1em}
       </p>
     </div>
 
-    <div class="map-grid">
-      <div>
-        <svg viewBox="0 0 1120 900" role="img"
-             aria-label="Map of Australia showing the five regions UTalenTours covers"
-             xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="land" x1="0" y1="0" x2=".35" y2="1">
-              <stop offset="0%" stop-color="#f0e4cf"/>
-              <stop offset="100%" stop-color="#e2cfb2"/>
-            </linearGradient>
-          </defs>
-
-          <g stroke="#d9cbb5" stroke-width="1" opacity=".55">
-            <path d="M0 140 H1120 M0 300 H1120 M0 460 H1120 M0 620 H1120 M0 780 H1120"/>
-            <path d="M160 0 V900 M360 0 V900 M560 0 V900 M760 0 V900 M960 0 V900"/>
-          </g>
-
-          <!-- mainland -->
-          <path fill="url(#land)" stroke="#ac835a" stroke-width="2.4" stroke-linejoin="round"
-            d="M702,56 L695,78 L688,102 L684,118 L685,166 L664,212 L635,217 L623,192 L580,176
-               L560,145 L572,112 L574,91 L531,89 L515,87 L439,96 L410,137 L379,167 L360,150
-               L345,139 L320,158 L300,180 L278,208 L247,223 L165,277 L87,308 L65,312 L56,383
-               L67,447 L76,472 L101,546 L98,576 L87,601 L150,615 L240,590 L284,583 L340,563
-               L397,539 L448,534 L504,548 L531,583 L553,608 L578,572 L592,604 L604,578 L612,613
-               L643,656 L663,684 L681,692 L724,703 L755,692 L789,709 L825,682 L868,663 L886,617
-               L898,589 L935,533 L951,468 L940,441 L942,392 L898,358 L852,296 L798,253 L775,199
-               L764,167 L746,137 L730,118 L719,94 L710,72 Z"/>
-
-          <!-- tasmania -->
-          <path fill="url(#land)" stroke="#ac835a" stroke-width="2.4" stroke-linejoin="round"
-            d="M751,747 L788,758 L825,748 L832,774 L823,804 L798,813 L778,806 L764,780 Z"/>
-
-          <!-- great barrier reef -->
-          <path d="M792,176 C822,228 866,292 896,352" stroke="#3f7d86" stroke-width="7"
-                fill="none" stroke-linecap="round" opacity=".5" stroke-dasharray="2 12"/>
-
-          <g font-family="-apple-system,Helvetica,Arial,sans-serif" font-size="22" fill="#231f1c">
-            <!-- tropical north -->
-            <circle cx="439" cy="98" r="7" fill="#3f7d86"/>
-            <text x="456" y="105">Darwin</text>
-            <circle cx="775" cy="201" r="8" fill="#3f7d86"/>
-            <text x="794" y="196">Cairns</text>
-            <text x="794" y="228" font-size="18" fill="#4f7f85">Great Barrier Reef</text>
-            <!-- red centre -->
-            <circle cx="444" cy="392" r="9" fill="#b0512a"/>
-            <text x="464" y="399">Uluru</text>
-            <circle cx="452" cy="350" r="5" fill="#b0512a" opacity=".7"/>
-            <text x="468" y="344" font-size="18" fill="#96603f">Alice Springs</text>
-            <!-- east coast -->
-            <circle cx="940" cy="441" r="7" fill="#c68f30"/>
-            <text x="958" y="447">Brisbane</text>
-            <circle cx="898" cy="589" r="9" fill="#c68f30"/>
-            <text x="917" y="595">Sydney</text>
-            <!-- south -->
-            <circle cx="612" cy="613" r="7" fill="#4b6350"/>
-            <text x="595" y="608" text-anchor="end">Adelaide</text>
-            <circle cx="755" cy="692" r="8" fill="#4b6350"/>
-            <text x="772" y="686">Melbourne</text>
-            <circle cx="582" cy="640" r="5" fill="#4b6350" opacity=".7"/>
-            <text x="566" y="662" text-anchor="end" font-size="18" fill="#55705a">Kangaroo Island</text>
-            <circle cx="810" cy="792" r="7" fill="#4b6350"/>
-            <text x="846" y="798">Hobart</text>
-            <!-- west -->
-            <circle cx="101" cy="546" r="7" fill="#8c8279"/>
-            <text x="119" y="552">Perth</text>
-          </g>
-
-          <text x="56" y="860" font-family="-apple-system,Helvetica,Arial,sans-serif"
-                font-size="19" fill="#8c8279">
-            Distances are real. We plan around them rather than against them.
-          </text>
-        </svg>
+    <div class="regions">
+      <div class="region">
+        <span class="rbar" style="background:#3f7d86"></span>
+        <div class="inner">
+          <h3 data-zh="热带北部">The Tropical North</h3>
+          <p data-zh="凯恩斯、丹翠雨林、大堡礁、达尔文。旱季五月至九月最佳。">Cairns, the Daintree, the Reef and Darwin. At its best in the dry, May to September.</p>
+        </div>
       </div>
-
-      <ul class="map-legend">
-        <li>
-          <div class="k"><span class="dot" style="background:#3f7d86"></span><span data-zh="热带北部">The Tropical North</span></div>
-          <div class="d" data-zh="凯恩斯、丹翠雨林、大堡礁、达尔文。旱季五月至九月最佳。">Cairns, the Daintree, the Reef and Darwin. At its best in the dry, May to September.</div>
-        </li>
-        <li>
-          <div class="k"><span class="dot" style="background:#b0512a"></span><span data-zh="红色中心">The Red Centre</span></div>
-          <div class="d" data-zh="乌鲁鲁、卡塔丘塔、国王峡谷、爱丽斯泉。清早出发，午后休息。">Uluru, Kata Tjuta, Kings Canyon and Alice Springs. Early starts, quiet afternoons.</div>
-        </li>
-        <li>
-          <div class="k"><span class="dot" style="background:#c68f30"></span><span data-zh="东海岸">The East Coast</span></div>
-          <div class="d" data-zh="悉尼、蓝山、猎人谷、拜伦湾、布里斯班。全年可行。">Sydney, the Blue Mountains, the Hunter, Byron and Brisbane. Workable all year.</div>
-        </li>
-        <li>
-          <div class="k"><span class="dot" style="background:#4b6350"></span><span data-zh="南部">The South</span></div>
-          <div class="d" data-zh="墨尔本、大洋路、阿德莱德、袋鼠岛与塔斯马尼亚。夏秋两季最舒服。">Melbourne, the Great Ocean Road, Adelaide, Kangaroo Island and Tasmania. Summer and autumn.</div>
-        </li>
-        <li>
-          <div class="k"><span class="dot" style="background:#8c8279"></span><span data-zh="西澳">The West</span></div>
-          <div class="d" data-zh="珀斯、玛格丽特河与西南海岸。适合安排较长假期的旅客。">Perth, Margaret River and the south-west coast. For travellers with a longer holiday.</div>
-        </li>
-      </ul>
+      <div class="region">
+        <span class="rbar" style="background:#b0512a"></span>
+        <div class="inner">
+          <h3 data-zh="红色中心">The Red Centre</h3>
+          <p data-zh="乌鲁鲁、卡塔丘塔、国王峡谷、爱丽斯泉。清早出发，午后休息。">Uluru, Kata Tjuta, Kings Canyon and Alice Springs. Early starts, quiet afternoons.</p>
+        </div>
+      </div>
+      <div class="region">
+        <span class="rbar" style="background:#c68f30"></span>
+        <div class="inner">
+          <h3 data-zh="东海岸">The East Coast</h3>
+          <p data-zh="悉尼、蓝山、猎人谷、拜伦湾、布里斯班。全年可行。">Sydney, the Blue Mountains, the Hunter, Byron and Brisbane. Workable all year.</p>
+        </div>
+      </div>
+      <div class="region">
+        <span class="rbar" style="background:#4b6350"></span>
+        <div class="inner">
+          <h3 data-zh="南部">The South</h3>
+          <p data-zh="墨尔本、大洋路、阿德莱德、袋鼠岛与塔斯马尼亚。夏秋两季最舒服。">Melbourne, the Great Ocean Road, Adelaide, Kangaroo Island and Tasmania. Summer and autumn.</p>
+        </div>
+      </div>
+      <div class="region">
+        <span class="rbar" style="background:#8c8279"></span>
+        <div class="inner">
+          <h3 data-zh="西澳">The West</h3>
+          <p data-zh="珀斯、玛格丽特河与西南海岸。适合安排较长假期的旅客。">Perth, Margaret River and the south-west coast. For travellers with a longer holiday.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
